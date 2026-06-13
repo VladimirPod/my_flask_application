@@ -1,0 +1,47 @@
+<!-- app/routes/templates/auth/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<section class="register_page">
+
+    <div class="register_container">
+
+      <h3 class="register_title">Регистрация</h3>
+
+      <div class="form_container">
+      <form action="" method="post">
+
+         <div class="input_reg">
+            <label for="text" class="label-input">Ввести имя</label>
+           <input type="text" class="input_data" placeholder="  Имя">
+         </div>  
+      
+         <div class="input_reg">
+            <label for="email" class="label-input">Введите email</label>
+           <input type="email" class="input_data" placeholder="  Email">           
+         </div>
+
+         <div class="input_reg">
+            <label for="password" class="label-input">Введите пароль</label>
+            <input type="password" class="input_data" placeholder="  Придумайте пароль">
+         </div>
+
+         <div class="input_reg">
+            <label for="password" class="label-input">Повторите пароль</label>
+            <input type="password" class="input_data" placeholder="  Повторите пароль">
+         </div>
+
+         <div class="register_btn">
+            <button type="submit" class="add_register">Создать</button>
+         </div>
+
+      </form>
+      </div>
+   </div>
+</section>
+
+    
+{% endblock %}
