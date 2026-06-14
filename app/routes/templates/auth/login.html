@@ -1,9 +1,58 @@
 {% extends "base.html" %}
 
 {% block title %}Login{% endblock %}
-
-
-
 {%  block content %}
-<h2>Login</h2>
+<section class="login_page">
+
+<div class="login_container">
+
+    <h3 class="login_title">Вход</h3>
+
+<div class="form_container_login">
+    <form action="{{ url_for('auth.login') }}" method="post">
+
+        <div class="input_log">
+            <label for="email" class="label-input">Введите email</label>
+            <input 
+            id="email" 
+            type="email" 
+            name="email" 
+            class="input_data" 
+            placeholder="user@example.com" 
+            autocomplete="email" 
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Email должен содержать доменное имя, например: user@example.com"
+            required>           
+        </div>
+
+        <div class="input_log">
+            <label for="password" class="label-input">Введите пароль</label>
+            <input id="password" type="password" name="password" class="input_data" placeholder="Введите ваш пароль" autocomplete="new-password">
+        </div>
+
+        <div class="login_btn">
+            <button type="submit" class="add_register">Войти</button>
+        </div>
+
+    </form>
+    </div>
+</div>
+
+    <script>
+      // Находим все поля ввода в форме
+        const inputs = document.querySelectorAll('.input_data');
+      // Находим контейнер с сообщениями об ошибках
+        const flashContainer = document.querySelector('.flash-messages');
+
+      // Вешаем обработчик события на каждое поле ввода
+        inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            if (flashContainer) {
+              // Полностью очищаем содержимое блока с ошибкой при клике на поле
+            flashContainer.innerHTML = '';
+            }
+        });
+    });
+    </script>
+</section>
 {% endblock %}

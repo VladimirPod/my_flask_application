@@ -11,18 +11,7 @@
 
       <h3 class="register_title">Регистрация</h3>
       
-<!-----------------СООБЩЕНИЕ ОБ ОШИБКАХ---------------->
-      <div class="flash-messages">
-         {% with messages = get_flashed_messages(with_categories=true) %}
-         {% if messages %}
-         {% for category, message in messages %}
-         <div class="alert_alert {{ category }}">
-            {{ message }}
-         </div>
-         {% endfor %}
-         {% endif %}
-         {% endwith %}
-      </div>
+
 
       <div class="form_container">
       <form action="{{ url_for('auth.register') }}" method="post">
@@ -53,7 +42,7 @@
 
          <div class="input_reg">
             <label for="confirm_password" class="label-input">Повторите пароль</label>
-            <input id="confirm_password"  type="password" name="confirm_password" class="input_data" placeholder="Повторите пароль" autocomplete="new_password">
+            <input id="confirm_password"  type="password" name="confirm_password" class="input_data" placeholder="Повторите пароль" autocomplete="new-password">
          </div>
 
          <div class="register_btn">
@@ -63,23 +52,34 @@
       </form>
       </div>
    </div>
-
    <script>
-      // Находим все поля ввода в форме
-      const inputs = document.querySelectorAll('.input_data');
-      // Находим контейнер с сообщениями об ошибках
-      const flashContainer = document.querySelector('.flash-messages');
+      document.addEventListener('DOMContentLoaded', () => {
+         const flashContainer = document.querySelector('.flash-messages');
+         const inputs = document.querySelectorAll('.input_data');
 
-      // Вешаем обработчик события на каждое поле ввода
+      // 1. Плавное исчезновение через 3 секунды после загрузки страницы
+      if (flashContainer && flashContainer.children.length > 0) {
+         setTimeout(() => {
+            flashContainer.style.transition = 'opacity 0.5s ease';
+            flashContainer.style.opacity = '0';
+              // Удаляем из HTML после завершения анимации
+            setTimeout(() => { flashContainer.innerHTML = ''; flashContainer.style.opacity = '1'; }, 500);
+          }, 3000); // 3000 миллисекунд = 3 секунды
+      }
+
+      // 2. Ваша старая логика: мгновенное удаление при клике на любое поле ввода
       inputs.forEach(input => {
-      input.addEventListener('focus', () => {
+         input.addEventListener('focus', () => {
             if (flashContainer) {
-              // Полностью очищаем содержимое блока с ошибкой при клике на поле
-               flashContainer.innerHTML = '';
+                  flashContainer.innerHTML = '';
             }
          });
       });
-   </script>
+});
+</script>
+
+
+
 </section>
 
 {% endblock %}
