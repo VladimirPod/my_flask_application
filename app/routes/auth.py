@@ -1,12 +1,18 @@
 from flask import Blueprint, url_for, render_template, request, redirect, flash
 from app.models import User
 from app import db
-# ИМПОРТ ЗДЕСЬ: импортируем класс User из файла моделей
+from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User 
 import re
+import os
+
+
 
 # Регулярное выражение для строгой проверки email (обязательно наличие точки и домена)
 EMAIL_REGEX = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+# Определяем точный путь к папке templates внутри auth
+auth_templates = os.path.join(os.path.dirname(__file__), 'templates')
 
 auth_bp = Blueprint('auth', __name__, template_folder='templates')
 

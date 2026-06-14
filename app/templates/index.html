@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<section class="home_page" style="text-align: center; margin-top: 50px;">
+    <h1>Добро пожаловать на наш сайт!</h1>
+    <p style="font-size: 18px; color: #666;">Это демонстрация работы шаблона Blueprint совместно с системой авторизации Flask-Login.</p>
+    
+    {% if current_user.is_authenticated %}
+        <div style="margin-top: 30px; background: #e8f5e9; padding: 20px; border-radius: 8px;">
+            <h3>Статус: Авторизован</h3>
+            <p>Ваш Email: <strong>{{ current_user.email }}</strong></p>
+            <p>Ваш ID в базе данных DBeaver: <strong>{{ current_user.id }}</strong></p>
+        </div>
+    {% else %}
+        <div style="margin-top: 30px; background: #ffebee; padding: 20px; border-radius: 8px;">
+            <h3>Статус: Гость</h3>
+            <p>Пожалуйста, войдите в свой аккаунт или зарегистрируйтесь, чтобы получить доступ к закрытым функциям.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+
